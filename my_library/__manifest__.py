@@ -12,6 +12,7 @@ Description related to library.
     'category': 'Tools',
     'version': '14.0.1',
     'depends': ['base'],
+    'sequence': 0,
 
     'data': [
         'security/groups.xml',
@@ -24,6 +25,9 @@ Description related to library.
     # 'demo': [
     #     'demo.xml'
     # ],
+    'installable': True,
+    'application': True,
+    'auto_install': False,
 }
 
 

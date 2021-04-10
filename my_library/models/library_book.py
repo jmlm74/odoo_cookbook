@@ -60,6 +60,9 @@ class LibraryBook(models.Model):
     currency_id = fields.Many2one(
         'res.currency', string='Currency')
     category_id = fields.Many2one('library.book.category')
+    ref_doc_id = fields.Reference(
+        selection='_referencable_models',
+        string='Reference Document')
 
     """
     Methods
@@ -100,6 +103,13 @@ class LibraryBook(models.Model):
             }
         new_op = operator_map.get(operator, operator)
         return [('date_release', new_op, value_date)]
+
+    @api.model
+    def _referencable_models(self):
+        models = self.env['ir.model'].search([
+            ('field_id.name', '=', 'message_ids')])
+        return [(x.model, x.name) for x in models]
+
 
 class ResPartner(models.Model):
     _inherit = 'res.partner'
