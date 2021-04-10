@@ -52,6 +52,10 @@ class LibraryBook(models.Model):
         context={},
         domain=[],
     )
+    publisher_city = fields.Char(
+        'Publisher City',
+        related='publisher_id.city',
+        readonly=True)
     author_ids = fields.Many2many('res.partner', string='Authors')
     currency_id = fields.Many2one(
         'res.currency', string='Currency')
