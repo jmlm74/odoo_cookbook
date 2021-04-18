@@ -155,6 +155,12 @@ class LibraryBook(models.Model):
     def make_lost(self):
         self.change_state('lost')
 
+    def log_all_library_members(self):
+        # This is an empty recordset of model library.member
+        library_member_model = self.env['library.member']
+        all_members = library_member_model.search([])
+        print("ALL MEMBERS:", all_members)
+        return True
 
 class ResPartner(models.Model):
     _inherit = 'res.partner'
