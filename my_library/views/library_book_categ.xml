@@ -7,7 +7,8 @@
         <field name="view_mode">tree,form</field>
     </record>
 
-    <menuitem name="Book Categories" id="library_book_category_menu" parent="library_base_menu" action="library_book_category_action"/>
+    <menuitem name="Book Categories" id="library_book_category_menu" parent="library_base_menu"
+              action="library_book_category_action"/>
 
     <!-- Form View -->
     <record id="library_book_category_view_form" model="ir.ui.view">
@@ -18,6 +19,7 @@
                 <group>
                     <group>
                         <field name="name"/>
+                        <field name="description"/>
                     </group>
                     <group>
                         <field name="parent_id"/>
@@ -30,7 +32,7 @@
         </field>
     </record>
 
-     <!-- Tree(list) View -->
+    <!-- Tree(list) View -->
     <record id="library_book_category_view_tree" model="ir.ui.view">
         <field name="name">Library Book List</field>
         <field name="model">library.book.category</field>
