@@ -1,9 +1,12 @@
 # -*- coding: utf-8 -*-
+import logging
 from datetime import timedelta
 
 from odoo import models, fields, api
 from odoo.exceptions import UserError
 from odoo.tools.translate import _
+
+logger = logging.getLogger(__name__)
 
 
 class BaseArchive(models.AbstractModel):
@@ -194,6 +197,21 @@ class LibraryBook(models.Model):
             '&', ('name', 'ilike', 'Book Name 2'), ('category_id.name', 'ilike', 'Category Name2')
             ]
         books = self.search(domain)
+        logger.info('Books found: %s', books)
+        return True
+
+    def filter_books(self):
+        all_books = self.search([])
+        filtered_books = self.books_with_multiple_authors(all_books)
+        logger.info('Filtered Books: %s', filtered_books)
+
+    @api.model
+    def books_with_multiple_authors(self, all_books):
+        def predicate(book):
+            if len(book.author_ids) > 1:
+                return True
+        return all_books.filtered(predicate)
+
 
 class ResPartner(models.Model):
     _inherit = 'res.partner'
@@ -216,6 +234,7 @@ class ResPartner(models.Model):
     def _compute_count_books(self):
         for r in self:
             r.count_books = len(r.authored_book_ids)
+        # Filter recordset
 
 
 class LibraryMember(models.Model):
