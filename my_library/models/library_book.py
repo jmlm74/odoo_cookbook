@@ -84,6 +84,7 @@ class LibraryBook(models.Model):
         ('borrowed', 'Borrowed'),
         ('lost', 'Lost')],
         'State', default="draft")
+    manager_remarks = fields.Text('Manager Remarks')
 
     """
     Methods
@@ -231,6 +232,26 @@ class LibraryBook(models.Model):
     @api.model
     def sort_books_by_date(self, books):
         return books.sorted(key='release_date')
+
+    @api.model
+    def create(self, values):
+        if not self.user_has_groups('my_library.acl_book_librarian'):
+            if 'manager_remarks' in values:
+                raise UserError(
+                    'You are not allowed to modify '
+                    'manager_remarks'
+                )
+        return super(LibraryBook, self).create(values)
+
+    def write(self, values):
+        if not self.user_has_groups('my_library.acl_book_librarian'):
+            if 'manager_remarks' in values:
+                raise UserError(
+                    'You are not allowed to modify '
+                    'manager_remarks'
+                )
+        return super(LibraryBook, self).write(values)
+
 
 class ResPartner(models.Model):
     _inherit = 'res.partner'

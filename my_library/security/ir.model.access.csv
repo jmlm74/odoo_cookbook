@@ -7,3 +7,6 @@ acl_book_copy,library.book_default_copy,model_library_book_copy,,1,0,0,0
 acl_book_librarian_copy,library.book_librarian_copy,model_library_book_copy,group_librarian,1,1,1,1
 acl_library_member,library.library_member,model_library_member,,1,0,0,0
 acl_library_member_librarian,library.library_member,model_library_member,group_librarian,1,1,1,1
+
+acl_book_user,library.book_default,model_library_book,base.group_user,1,1,0,0
+acl_book_librarian,library.book_librarian,model_library_book,group_librarian,1,1,1,1
