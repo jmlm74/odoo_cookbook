@@ -224,6 +224,10 @@ class LibraryBook(models.Model):
     def books_with_multiple_authors2(self, all_books):
         return all_books.filter(lambda b: len(b.author_ids) > 1)
 
+    @api.model
+    def get_author_names(self, books):
+        return books.mapped('author_ids.name')
+
 class ResPartner(models.Model):
     _inherit = 'res.partner'
     _order = 'name'
