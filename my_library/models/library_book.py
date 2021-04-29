@@ -212,6 +212,17 @@ class LibraryBook(models.Model):
                 return True
         return all_books.filtered(predicate)
 
+    @api.model
+    def books_with_multiple_authors(self, all_books):
+        def predicate(book):
+            if len(book.author_ids) > 1:
+                return True
+            return False
+        return all_books.filter(predicate)
+
+    @api.model
+    def books_with_multiple_authors2(self, all_books):
+        return all_books.filter(lambda b: len(b.author_ids) > 1)
 
 class ResPartner(models.Model):
     _inherit = 'res.partner'
