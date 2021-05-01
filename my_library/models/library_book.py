@@ -265,6 +265,15 @@ class LibraryBook(models.Model):
         return super(LibraryBook, self)._name_search(name=name, args=args, operator=operator,
                                                      limit=limit, name_get_uid=name_get_uid)
 
+    @api.model
+    def _get_average_cost(self):
+        grouped_result = self.read_group(
+            [('cost_price', "!=", False)],  # Domain
+            ['category_id', 'cost_price:avg'],  # Fields to access
+            ['category_id']  # group_by
+        )
+        return grouped_result
+
 
 class ResPartner(models.Model):
     _inherit = 'res.partner'
