@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <record id="base.main_company" model="res.company">
-        <field name="name">Packt publishing</field>
-    </record>
     <record id="author_pga" model="res.partner">
         <field name="name">Parth Gajjar</field>
     </record>
@@ -15,14 +12,21 @@
     <record id="author_hb" model="res.partner">
         <field name="name">Holger Brunn</field>
     </record>
+    <record id="res_partner_packt" model="res.partner">
+        <field name="name">Packt Publishing</field>
+        <field name="city">Birmingham</field>
+        <field name="country_id" ref="base.uk"/>
+    </record>
     <record id="book_cookbook" model="library.book">
         <field name="name">Odoo Cookbook</field>
         <field name="short_name">cookbook</field>
         <field name="date_release">2016-03-01</field>
         <field name="author_ids"
                eval="[(6, 0, [ref('author_af'),
-                              ref('author_dr'),
-                              ref('author_hb')])]"
+                                ref('author_dr'),
+                                ref('author_hb')])]"
         />
+        <field name="publisher_id" ref="res_partner_packt"/>
     </record>
+
 </odoo>
