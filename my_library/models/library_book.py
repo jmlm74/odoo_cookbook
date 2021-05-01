@@ -71,6 +71,7 @@ class LibraryBook(models.Model):
         'Publisher City',
         related='publisher_id.city',
         readonly=True)
+    isbn = fields.Char('ISBN')
     author_ids = fields.Many2many('res.partner', string='Authors')
     currency_id = fields.Many2one(
         'res.currency', string='Currency')
@@ -85,6 +86,7 @@ class LibraryBook(models.Model):
         ('lost', 'Lost')],
         'State', default="draft")
     manager_remarks = fields.Text('Manager Remarks')
+    old_edition = fields.Many2one('library.book', string='Old Edition')
 
     """
     Methods
@@ -251,6 +253,17 @@ class LibraryBook(models.Model):
                     'manager_remarks'
                 )
         return super(LibraryBook, self).write(values)
+
+    @api.model
+    def _name_search(self, name='', args=None, operator='ilike', limit=100, name_get_uid=None):
+        args = [] if args is None else args.copy()
+        if not (name == '' and operator == 'ilike'):
+            args += ['|', '|', ('name', operator, name),
+                     ('isbn', operator, name),
+                     ('author_ids.name', operator, name)
+                     ]
+        return super(LibraryBook, self)._name_search(name=name, args=args, operator=operator,
+                                                     limit=limit, name_get_uid=name_get_uid)
 
 
 class ResPartner(models.Model):

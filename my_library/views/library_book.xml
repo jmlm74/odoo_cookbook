@@ -49,6 +49,7 @@
                         <field name="reader_rating"/>
                         <field name="age_days"/>
                         <field name="ref_doc_id" />
+                        <field name="old_edition" />
                     </group>
                 </group>
                 <group>
