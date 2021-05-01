@@ -16,16 +16,6 @@
         <field name="model">library.book</field>
         <field name="arch" type="xml">
             <form>
-                <button name="make_available" string="Make Available" type="object"/>
-                <button name="make_borrowed" string="Make Borrowed" type="object"/>
-                <button name="make_lost" string="Make Lost" type="object"/>
-
-                <button name="log_all_library_members" string="Log Members" type="object"/>
-                <button name="create_categories" string="Create Categories" type="object"/>
-                <button name="change_release_date" string="Update Date" type="object"/>
-                <button name="find_book" string="Find Book" type="object"/>
-                <button name="filter_books" string="Filter Book " type="object"/>
-                <field name="state" widget="statusbar"/>
                 <group>
                     <group>
                         <field name="name"/>
@@ -37,19 +27,14 @@
                         <field name="retail_price"/>
                         <field name="currency_id"/>
                         <field name="category_id"/>
-                        <field name="manager_remarks"/>
                     </group>
                     <group>
                         <field name="short_name"/>
                         <field name="publisher_id"/>
-                        <field name="publisher_city" />
                         <field name="date_release"/>
                         <field name="date_updated"/>
                         <field name="cover" widget="image" class="oe_avatar"/>
                         <field name="reader_rating"/>
-                        <field name="age_days"/>
-                        <field name="ref_doc_id" />
-                        <field name="old_edition" />
                     </group>
                 </group>
                 <group>
